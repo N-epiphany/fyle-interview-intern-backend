@@ -57,4 +57,4 @@ pytest -vvv -s tests/
 
 ### About the Application
 
-For a better understanding about the flask application check [here](./About.md)
+For a better understanding about the flask application check [here](About.md)
