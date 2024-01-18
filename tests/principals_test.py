@@ -1,4 +1,11 @@
+#filename: principals_test.py path:tests/principals_test.py 
+# Description: This file contains the tests for principals
+
 from core.models.assignments import AssignmentStateEnum, GradeEnum
+from core.models.assignments import Assignment, GradeEnum
+from core.models.principals import Principal
+from core.apis.decorators import AuthPrincipal
+from core import db
 
 
 def test_get_assignments(client, h_principal):
@@ -18,6 +25,11 @@ def test_grade_assignment_draft_assignment(client, h_principal):
     """
     failure case: If an assignment is in Draft state, it cannot be graded by principal
     """
+
+    # Ensure the assignment is in the DRAFT state before the test
+    assignment = Assignment.get_by_id(5)
+    assignment.state = AssignmentStateEnum.DRAFT
+    db.session.commit()
     response = client.post(
         '/principal/assignments/grade',
         json={
@@ -26,7 +38,7 @@ def test_grade_assignment_draft_assignment(client, h_principal):
         },
         headers=h_principal
     )
-
+    # print(f"Assignment ID: 5, State: {Assignment.get_by_id(5).state}")  # debugging
     assert response.status_code == 400
 
 
@@ -60,3 +72,4 @@ def test_regrade_assignment(client, h_principal):
 
     assert response.json['data']['state'] == AssignmentStateEnum.GRADED.value
     assert response.json['data']['grade'] == GradeEnum.B
+

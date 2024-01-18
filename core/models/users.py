@@ -1,3 +1,6 @@
+# filename: users.py path:core/models/users.py
+# Description: This file contains the User model
+
 from core import db
 from core.libs import helpers
 

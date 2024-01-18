@@ -1,3 +1,6 @@
+# file: __init__.py path: core/apis/teachers/__init__.py
+# Description: This file is used to import all the teachers resources
+
 import json
 from flask import request
 from core.libs import assertions

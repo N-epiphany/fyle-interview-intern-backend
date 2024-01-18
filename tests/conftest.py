@@ -1,3 +1,6 @@
+# filename: conftest.py path: tests/conftest.py
+# Description: This file contains the tests setup
+
 import pytest
 import json
 from tests import app

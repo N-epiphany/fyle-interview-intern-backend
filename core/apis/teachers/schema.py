@@ -1,0 +1,1 @@
+# schema.py file in teachers folder is empty

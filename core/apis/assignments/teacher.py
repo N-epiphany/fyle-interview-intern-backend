@@ -1,3 +1,6 @@
+# filename: teacher.py path: core/apis/assignments/teacher.py
+# Description: This file contains the teacher assignment resources
+
 from flask import Blueprint
 from core import db
 from core.apis import decorators
@@ -9,19 +12,21 @@ teacher_assignments_resources = Blueprint('teacher_assignments_resources', __nam
 
 
 @teacher_assignments_resources.route('/assignments', methods=['GET'], strict_slashes=False)
-@decorators.authenticate_principal
-def list_assignments(p):
-    """Returns list of assignments"""
-    teachers_assignments = Assignment.get_assignments_by_teacher(p.teacher_id)
-    teachers_assignments_dump = AssignmentSchema().dump(teachers_assignments, many=True)
-    return APIResponse.respond(data=teachers_assignments_dump)
+@decorators.authenticate_principal  
+def list_assignments(t):
+    """Returns list of assignments for the teacher."""
 
+    # Filter assignments based on the teacher's ID 
+    teacher_assignments = Assignment.get_assignments_by_teacher(t.teacher_id)
+    teachers_assignments_dump = AssignmentSchema().dump(teacher_assignments, many=True)
+    return APIResponse.respond(data=teachers_assignments_dump)
 
 @teacher_assignments_resources.route('/assignments/grade', methods=['POST'], strict_slashes=False)
 @decorators.accept_payload
 @decorators.authenticate_principal
 def grade_assignment(p, incoming_payload):
     """Grade an assignment"""
+    
     grade_assignment_payload = AssignmentGradeSchema().load(incoming_payload)
 
     graded_assignment = Assignment.mark_grade(

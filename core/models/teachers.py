@@ -1,3 +1,6 @@
+# Filename: teachers.py path: core/models/teachers.py
+# Description: This file contains the Teacher model
+
 from core import db
 from core.libs import helpers
 

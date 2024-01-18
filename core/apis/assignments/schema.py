@@ -1,3 +1,6 @@
+# filename: schema.py path: core/apis/assignments/schema.py
+# Description: This file contains the schema for the assignment model
+
 from marshmallow import Schema, EXCLUDE, fields, post_load
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, auto_field
 from marshmallow_enum import EnumField

@@ -1,3 +1,6 @@
+# filename: sql_test.py path: tests/SQL/sql_test.py
+# Description: This file contains the tests for SQL queries
+
 import random
 from sqlalchemy import text
 
